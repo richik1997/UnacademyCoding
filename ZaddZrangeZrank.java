@@ -2,19 +2,22 @@
   The following functions are implemented using Java:
   ZADD(score,value,key)
   Parameters 
-  1. key represnts "KEY"
-  2. scores represnts the list of scores
+  1. key represents "KEY"
+  2. scores represents the list of scores
   3. value represents the list of values for respective scores
+  
+  ZADD function has been represented by passing lists of scores and values as parameters. 
+  It can be overloaded to support other datatypes as done for SET, GET,etc in SetExpireGetTTLPTTL.java.
   
   ZRANGE(start,end, key)
   Parameters 
-  1. key represnts "KEY"
-  2. start represnts the starting value of the range
-  3. end represnts the ending value of the range
+  1. key represents "KEY"
+  2. start represents the starting value of the range
+  3. end represents the ending value of the range
   
   ZRANK(value,key)
   Parameters 
-  1. key represnts "KEY"
+  1. key represents "KEY"
   2. value represents the value whose rank needs to be searched
   
 */
@@ -143,7 +146,7 @@ class RedisDB
 
 }
 
-class Main
+class ZaddZrangeZrank
 {
     public static void main(String args[])
     {
