@@ -1,11 +1,61 @@
+/*
+  The following functions are implemented using Java:
+  SET-Redis operations have been performed by overloading the SET() function to support its different operations 
+  SET(key,value)
+  Parameters 
+  1. key represents "KEY"
+  2. value represents the vakue to be mapped to the respective keys
+  Returns "OK" if successfully done
+  
+  SET(key,expiry,type)
+  Parameters 
+  1. key represents "KEY"
+  2. expiry represents the time of expiry of the respective key 
+  3. type specifies : PX for storing the time in miliseconds and EX for seconds 
+  Returns "OK" if successfully done
+  
+  GET(key)
+  Parameter:
+  1. key represents the key whose mapped value needs to be returned
+  Returns the string value mapped if key exists
+  
+  EXPIRE(key,expiry,type)
+  Parameters 
+  1. key represents "KEY"
+  2. expiry represents the time of expiry of the respective key 
+  3. type specifies : PX for storing the time in miliseconds and EX for seconds 
+  Returns 1 if successful and 0 otherwise
+  
+  TTL(key)
+  Parameter:
+  1. key represents the key whose remaining time to expire needs to be returned
+  Returns the following values:
+  1. -2 if key does not exist
+  2. -1 if time of expiry is not set
+  3. the remaining time to expire in seconds
+  
+  PTTL(key)
+  Parameter:
+  1. key represents the key whose remaining time to expire needs to be returned
+  Returns the following values:
+  1. -2 if key does not exist
+  2. -1 if time of expiry is not set
+  3. the remaining time to expire in miliseconds
+  
+*/
+
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.Date;
 
 class DBContent
 {
+    // Store the value
     String value;
+    // Store the time when time of expiry was set
     long time;
+    // Store the time to expire
     long expiry;
 
     DBContent(String value, long time, long expiry)
@@ -19,7 +69,9 @@ class DBContent
 
 class RedisDB
 {
+        // Map to store key and the respective unit of time of expiry pairings
         HashMap<String, String> tt = new HashMap<String,String>();
+        // Map to store key and (value,time,expiry) mappings
         HashMap<String, DBContent> mp = new HashMap<String, DBContent>();
 
         String set(String key, String value)
@@ -163,7 +215,7 @@ class RedisDB
 
 
 
-public class Main {
+public class SetExpireGetTTLPTTL {
     public static void main(String args[]) {
         RedisDB r = new RedisDB();
         System.out.println(r.set(2,"121av"));
@@ -172,9 +224,9 @@ public class Main {
         System.out.println(r.get(3141));
         System.out.println(r.expire(3141, 314721, "PX"));
         System.out.println(r.TTL("2"));
-         System.out.println(r.PTTL(2));
-          System.out.println(r.TTL(3141));
-           System.out.println(r.PTTL("3141"));
+        System.out.println(r.PTTL(2));
+        System.out.println(r.TTL(3141));
+        System.out.println(r.PTTL("3141"));
 
 
     }
